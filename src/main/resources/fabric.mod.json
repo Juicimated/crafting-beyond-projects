@@ -3,20 +3,24 @@
 	"id": "cbp",
 	"version": "${version}",
 	"name": "Crafting Beyond Projects",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "Custom content for the Crafting Beyond Projects server.",
 	"authors": [
-		"Me!"
+		"Juicimated",
+		"BlueBen8"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://juici.dev/",
+		"sources": "https://github.com/Juicimated/crafting-beyond-projects"
 	},
-	"license": "CC0-1.0",
+	"license": "MIT",
 	"icon": "assets/cbp/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
 			"dev.juici.cbp.CraftingBeyondProjects"
+		],
+		"client": [
+			"dev.juici.cbp.CraftingBeyondProjectsClient"
 		],
 		"fabric-datagen": [
 			"dev.juici.cbp.CraftingBeyondProjectsDataGenerator"
