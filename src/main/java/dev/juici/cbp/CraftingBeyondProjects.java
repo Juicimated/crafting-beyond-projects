@@ -1,5 +1,6 @@
 package dev.juici.cbp;
 
+import dev.juici.cbp.registry.CBPItemGroups;
 import dev.juici.cbp.registry.CBPItems;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
@@ -13,6 +14,7 @@ public class CraftingBeyondProjects implements ModInitializer {
 	public void onInitialize() {
 		LOGGER.info("[CBP] Registering " + MOD_ID);
 
+		CBPItemGroups.register();
 		CBPItems.register();
 	}
 }

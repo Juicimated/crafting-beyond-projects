@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.ItemModelGenerator;
 import net.minecraft.data.client.Models;
+import net.minecraft.item.Items;
 
 public class CBPModelProvider extends FabricModelProvider {
     public CBPModelProvider(FabricDataOutput output) {
@@ -19,6 +20,7 @@ public class CBPModelProvider extends FabricModelProvider {
 
     @Override
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
-        itemModelGenerator.register(CBPItems.BELLE_ROD, Models.GENERATED);
+        itemModelGenerator.register(Items.BREEZE_ROD, Models.HANDHELD);
+        itemModelGenerator.register(CBPItems.BELLE_ROD, Models.HANDHELD);
     }
 }
