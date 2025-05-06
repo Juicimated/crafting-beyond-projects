@@ -3,6 +3,8 @@
 	"package": "dev.juici.cbp.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
+		"EndermanEntityMixin",
+		"EndermanEntityRendererMixin",
 		"MinecraftServerMixin"
 	],
 	"injectors": {
