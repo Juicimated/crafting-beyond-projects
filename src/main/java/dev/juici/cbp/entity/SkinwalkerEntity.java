@@ -10,6 +10,7 @@ import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.text.Text;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
@@ -43,6 +44,8 @@ public class SkinwalkerEntity extends PathAwareEntity {
                 Random random = serverWorld.random;
                 ServerPlayerEntity randomPlayer = players.get(random.nextInt(players.size()));
                 this.copiedPlayer = randomPlayer.getUuid();
+                this.setCustomName(Text.literal(randomPlayer.getName().getString()));
+                this.setCustomNameVisible(true);
             }
         }
 
