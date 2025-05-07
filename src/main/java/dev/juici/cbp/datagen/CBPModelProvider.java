@@ -21,6 +21,9 @@ public class CBPModelProvider extends FabricModelProvider {
     @Override
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
         itemModelGenerator.register(Items.BREEZE_ROD, Models.HANDHELD);
+
+        itemModelGenerator.register(CBPItems.GOD_RESIDUE, Models.GENERATED);
+        itemModelGenerator.register(CBPItems.GODBALL, Models.GENERATED);
         itemModelGenerator.register(CBPItems.BELLE_ROD, Models.HANDHELD);
     }
 }

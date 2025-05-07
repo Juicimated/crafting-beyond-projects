@@ -1,0 +1,37 @@
+{
+  "display": {
+    "icon": {
+      "id": "cbp:belle_rod",
+      "count": 1
+    },
+    "title": {
+      "translate": "advancement.cbp.belle.title"
+    },
+    "description": {
+      "translate": "advancement.cbp.belle.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "cbp:cbp",
+  "criteria": {
+    "belle_rod": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "cbp:belle_rod"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "belle_rod"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

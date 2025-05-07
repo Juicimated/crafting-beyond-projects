@@ -1,0 +1,37 @@
+{
+  "display": {
+    "icon": {
+      "id": "cbp:godball",
+      "count": 1
+    },
+    "title": {
+      "translate": "advancement.cbp.ball.title"
+    },
+    "description": {
+      "translate": "advancement.cbp.ball.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "cbp:cbp",
+  "criteria": {
+    "godball": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "cbp:godball"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "godball"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

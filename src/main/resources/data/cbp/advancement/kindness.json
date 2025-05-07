@@ -1,0 +1,37 @@
+{
+  "display": {
+    "icon": {
+      "id": "cbp:staff_kindness",
+      "count": 1
+    },
+    "title": {
+      "translate": "advancement.cbp.kindness.title"
+    },
+    "description": {
+      "translate": "advancement.cbp.kindness.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "cbp:belle",
+  "criteria": {
+    "staff_kindness": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "cbp:staff_kindness"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "staff_kindness"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

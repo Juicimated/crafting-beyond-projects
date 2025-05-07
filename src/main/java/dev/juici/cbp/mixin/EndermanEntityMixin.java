@@ -4,6 +4,7 @@ import dev.juici.cbp.entity.SkinnedEnderman;
 import dev.juici.cbp.registry.CBPItems;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.EndermanEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -40,23 +41,31 @@ public class EndermanEntityMixin extends MobEntity implements SkinnedEnderman {
     protected ActionResult interactMob(PlayerEntity player, Hand hand) {
         ItemStack item = player.getStackInHand(hand);
         if (item.getItem() instanceof ShearsItem && !this.isSkinned) {
-            this.setSkinned(true);
-
             player.playSound(SoundEvents.ENTITY_SHEEP_SHEAR);
             item.damage(1, player, player.getPreferredEquipmentSlot(item));
 
             int count = player.getRandom().nextInt(2);
             ItemEntity pearls = new ItemEntity(player.getWorld(),
-                    this.getX(), this.getY() + 2, this.getZ(),
+                    this.getX(), this.getY(), this.getZ(),
                     new ItemStack(Items.ENDER_PEARL, count));
             player.getWorld().spawnEntity(pearls);
             ItemEntity rods = new ItemEntity(player.getWorld(),
-                    this.getX(), this.getY() + 2, this.getZ(),
+                    this.getX(), this.getY(), this.getZ(),
                     new ItemStack(CBPItems.BELLE_ROD, count));
             player.getWorld().spawnEntity(rods);
 
+            this.setSkinned(true);
             return ActionResult.SUCCESS;
         }
         return super.interactMob(player, hand);
+    }
+
+    @Override
+    protected void dropLoot(DamageSource source, boolean causedByPlayer) {
+        if (!this.isSkinned) {
+            super.dropLoot(source, causedByPlayer);
+        } else {
+            this.dropStack(null);
+        }
     }
 }

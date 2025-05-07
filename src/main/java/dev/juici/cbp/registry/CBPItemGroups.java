@@ -12,10 +12,13 @@ import net.minecraft.util.Identifier;
 public class CBPItemGroups {
     public static final ItemGroup CBP_GROUP = Registry.register(Registries.ITEM_GROUP,
             Identifier.of(CraftingBeyondProjects.MOD_ID, "cbp_group"),
-            FabricItemGroup.builder().icon(() -> new ItemStack(CBPItems.BELLE_ROD))
+            FabricItemGroup.builder().icon(() -> new ItemStack(CBPItems.GOD_RESIDUE))
                     .displayName(Text.translatable("itemgroup.cbp.cbp_group"))
                     .entries((displayContext, entries) -> {
+                        entries.add(CBPItems.GOD_RESIDUE);
+                        entries.add(CBPItems.GODBALL);
                         entries.add(CBPItems.BELLE_ROD);
+                        entries.add(CBPItems.STAFF_KINDNESS);
                     }).build());
 
     public static void register() {

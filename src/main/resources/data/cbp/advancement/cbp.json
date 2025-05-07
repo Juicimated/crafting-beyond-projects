@@ -1,0 +1,37 @@
+{
+  "display": {
+    "icon": {
+      "id": "cbp:god_residue",
+      "count": 1
+    },
+    "title": {
+      "translate": "advancement.cbp.cbp.title"
+    },
+    "description": {
+      "translate": "advancement.cbp.cbp.description"
+    },
+    "background": "minecraft:textures/block/acacia_planks.png",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "start": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "cbp:god_residue"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "start"
+    ]
+  ],
+  "sends_telemetry_event": false
+}
