@@ -19,6 +19,7 @@ public class CBPItemGroups {
                         entries.add(CBPItems.GODBALL);
                         entries.add(CBPItems.BELLE_ROD);
                         entries.add(CBPItems.STAFF_KINDNESS);
+                        entries.add(CBPItems.SKINWALKER_SPAWN_EGG);
                     }).build());
 
     public static void register() {

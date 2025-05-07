@@ -21,7 +21,7 @@ import java.util.Set;
 public class KindnessStaff extends StaffItem {
     private static final double RADIUS = 16.0;
     private static final int DURATION = 30 * 20;
-    private static final int COOLDOWN = 3 * 60 * 20;
+    private static final int COOLDOWN = 2 * 60 * 20;
     private boolean isActive = false;
     private int activeTicks = 0;
     private BlockPos center = null;

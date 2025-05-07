@@ -1,5 +1,6 @@
 package dev.juici.cbp;
 
+import dev.juici.cbp.registry.CBPEntities;
 import dev.juici.cbp.registry.CBPItemGroups;
 import dev.juici.cbp.registry.CBPItems;
 import net.fabricmc.api.ModInitializer;
@@ -26,6 +27,7 @@ public class CraftingBeyondProjects implements ModInitializer {
 
 		CBPItemGroups.register();
 		CBPItems.register();
+		CBPEntities.register();
 
 		ServerTickEvents.END_SERVER_TICK.register(server -> {
 			for (ServerPlayerEntity player : server.getPlayerManager().getPlayerList()) {
