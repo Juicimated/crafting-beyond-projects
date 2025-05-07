@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "cbp:belle_rod"
+    },
+    "F": {
+      "item": "minecraft:feather"
+    },
+    "G": {
+      "item": "cbp:godball"
+    }
+  },
+  "pattern": [
+    " FG",
+    " BF",
+    "B  "
+  ],
+  "result": {
+    "count": 1,
+    "id": "cbp:staff_kindness"
+  }
+}

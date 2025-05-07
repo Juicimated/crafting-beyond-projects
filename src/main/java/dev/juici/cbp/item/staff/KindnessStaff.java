@@ -7,6 +7,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.BlockPos;
@@ -17,9 +19,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class KindnessStaff extends StaffItem {
-    private static final double RADIUS = 32.0;
+    private static final double RADIUS = 16.0;
     private static final int DURATION = 30 * 20;
-    private static final int COOLDOWN = 5 * 60 * 20;
+    private static final int COOLDOWN = 3 * 60 * 20;
     private boolean isActive = false;
     private int activeTicks = 0;
     private BlockPos center = null;
@@ -35,6 +37,8 @@ public class KindnessStaff extends StaffItem {
 
         if (!world.isClient) {
             if (!isActive && !player.getItemCooldownManager().isCoolingDown(this)) {
+                world.playSound(null, player.getBlockPos(), SoundEvents.BLOCK_BEACON_ACTIVATE,
+                        SoundCategory.PLAYERS, 1.0f, 1.0f);
                 activateKindness(world, player);
                 player.getItemCooldownManager().set(this, COOLDOWN);
             }

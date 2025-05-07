@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_god_residue": {
+      "conditions": {
+        "items": [
+          {
+            "items": "cbp:god_residue"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "cbp:godball"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_god_residue"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "cbp:godball"
+    ]
+  }
+}
