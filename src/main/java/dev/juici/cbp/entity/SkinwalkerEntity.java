@@ -6,6 +6,8 @@ import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -18,10 +20,11 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public class SkinwalkerEntity extends PathAwareEntity {
-    private UUID copiedPlayer = null;
+    private static final TrackedData<Optional<UUID>> COPIED_PLAYER = DataTracker.registerData(SkinwalkerEntity.class, TrackedDataHandlerRegistry.OPTIONAL_UUID);
 
     public SkinwalkerEntity(EntityType<? extends PathAwareEntity> entityType, World world) {
         super(entityType, world);
@@ -43,7 +46,7 @@ public class SkinwalkerEntity extends PathAwareEntity {
             if (!players.isEmpty()) {
                 Random random = serverWorld.random;
                 ServerPlayerEntity randomPlayer = players.get(random.nextInt(players.size()));
-                this.copiedPlayer = randomPlayer.getUuid();
+                this.setCopiedPlayer(randomPlayer.getUuid());
                 this.setCustomName(Text.literal(randomPlayer.getName().getString()));
                 this.setCustomNameVisible(true);
             }
@@ -60,27 +63,29 @@ public class SkinwalkerEntity extends PathAwareEntity {
     @Override
     protected void initDataTracker(DataTracker.Builder builder) {
         super.initDataTracker(builder);
+        builder.add(COPIED_PLAYER, Optional.empty());
     }
 
     @Override
     public void readCustomDataFromNbt(NbtCompound nbt) {
         if (nbt.contains("CopiedPlayer")) {
-            this.copiedPlayer = nbt.getUuid("CopiedPlayer");
+            this.setCopiedPlayer(nbt.getUuid("CopiedPlayer"));
         }
     }
 
     @Override
     public void writeCustomDataToNbt(NbtCompound nbt) {
-        if (this.copiedPlayer != null) {
-            nbt.putUuid("CopiedPlayer", this.copiedPlayer);
+        UUID uuid = this.getCopiedPlayer();
+        if (uuid != null) {
+            nbt.putUuid("CopiedPlayer", uuid);
         }
     }
 
     public UUID getCopiedPlayer() {
-        return copiedPlayer;
+        return this.dataTracker.get(COPIED_PLAYER).orElse(null);
     }
 
     public void setCopiedPlayer(UUID uuid) {
-        this.copiedPlayer = uuid;
+        this.dataTracker.set(COPIED_PLAYER, Optional.ofNullable(uuid));
     }
 }
