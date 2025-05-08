@@ -13,6 +13,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
@@ -25,6 +26,7 @@ import java.util.UUID;
 
 public class SkinwalkerEntity extends PathAwareEntity {
     private static final TrackedData<Optional<UUID>> COPIED_PLAYER = DataTracker.registerData(SkinwalkerEntity.class, TrackedDataHandlerRegistry.OPTIONAL_UUID);
+    private static final TrackedData<String> COPIED_SKIN = DataTracker.registerData(SkinwalkerEntity.class, TrackedDataHandlerRegistry.STRING);
 
     public SkinwalkerEntity(EntityType<? extends PathAwareEntity> entityType, World world) {
         super(entityType, world);
@@ -64,6 +66,7 @@ public class SkinwalkerEntity extends PathAwareEntity {
     protected void initDataTracker(DataTracker.Builder builder) {
         super.initDataTracker(builder);
         builder.add(COPIED_PLAYER, Optional.empty());
+        builder.add(COPIED_SKIN, "minecraft:textures/entity/player/wide/steve.png");
     }
 
     @Override
@@ -71,13 +74,23 @@ public class SkinwalkerEntity extends PathAwareEntity {
         if (nbt.contains("CopiedPlayer")) {
             this.setCopiedPlayer(nbt.getUuid("CopiedPlayer"));
         }
+        if (nbt.contains("CopiedSkin")) {
+            Identifier skin = Identifier.tryParse(nbt.getString("CopiedSkin"));
+            if (skin != null) {
+                this.setCopiedSkin(skin);
+            }
+        }
     }
 
     @Override
     public void writeCustomDataToNbt(NbtCompound nbt) {
-        UUID uuid = this.getCopiedPlayer();
-        if (uuid != null) {
-            nbt.putUuid("CopiedPlayer", uuid);
+        UUID player = this.getCopiedPlayer();
+        if (player != null) {
+            nbt.putUuid("CopiedPlayer", player);
+        }
+        Identifier skin = this.getCopiedSkin();
+        if (skin != null) {
+            nbt.putString("CopiedSkin", skin.toString());
         }
     }
 
@@ -85,7 +98,17 @@ public class SkinwalkerEntity extends PathAwareEntity {
         return this.dataTracker.get(COPIED_PLAYER).orElse(null);
     }
 
-    public void setCopiedPlayer(UUID uuid) {
-        this.dataTracker.set(COPIED_PLAYER, Optional.ofNullable(uuid));
+    public void setCopiedPlayer(UUID player) {
+        this.dataTracker.set(COPIED_PLAYER, Optional.ofNullable(player));
+    }
+
+    public Identifier getCopiedSkin() {
+        return Identifier.tryParse(this.dataTracker.get(COPIED_SKIN));
+    }
+
+    public void setCopiedSkin(Identifier skin) {
+        if (skin != null) {
+            this.dataTracker.set(COPIED_SKIN, skin.toString());
+        }
     }
 }
